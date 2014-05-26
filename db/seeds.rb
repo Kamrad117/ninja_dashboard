@@ -1,9 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-user = CreateAdminService.new.call
-puts 'CREATED ADMIN USER: ' << user.email
+vcenters = [
+"yyz1-tchain01.prd.rmsonecloud.net",
+"lhr1-tchain01.prd.rmsonecloud.net",
+"kef1-vcenter-03.swlab.rmscloud.net",
+"hwd1-vcenter-03.swlab.rmscloud.net"
+]
+
+vcenters.each do |url|
+  Vcenter.create!(url: url)
+end

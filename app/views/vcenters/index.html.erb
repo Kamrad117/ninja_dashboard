@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-lg-4">
+      <div class="panel panel-warning">
+          <div class="panel-heading">
+              <h3 class="panel-title"><span class="glyphicon glyphicon-cloud-download"></span> Registered vcenters </h3>
+          </div>
+          <div class="panel-body">
+            <table class='table table-stripped table-hover'>
+                <% @vcenters.each do |vcenter| %>
+                  <tr>
+                    <td><%= link_to vcenter.link, vcenter %></td>
+                    <td>
+                      <%= link_to edit_vcenter_path(vcenter) do %>
+                          <span class="glyphicon glyphicon-cog">
+                      <%end%>
+                      <%= link_to vcenter, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                          <span class="glyphicon glyphicon-remove">
+                      <%end%>
+                    </td>
+                <% end %>
+                <tr>
+                  <td>
+                    <%= link_to new_vcenter_path do %>
+                      <span class="glyphicon glyphicon-plus"></span> Add
+                    <% end %>
+                  </td>
+                  <td></td>
+                </tr>
+            </table>
+          <div>
+      </div>
+  </div>
+</div>

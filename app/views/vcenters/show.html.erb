@@ -1,0 +1,88 @@
+            <div class="row">
+                <div class="col-lg-12">
+                    <%= render 'layouts/messages' %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-cloud-download"></span> Hardware values </h3>
+                        </div>
+                        <div class="panel-body">
+                          <table class= "table table-stripped table-hover">
+                          <thead>
+                            <td>
+                              Attribute
+                            </td>
+                            <td>
+                              Total
+                            </td>
+                            <td>
+                              Used
+                            </td>
+                            <td>
+                              Percent
+                            </td>
+                          </thead>
+                          <tbody>
+                            <% [:ram, :storage, :cpu_cores, :cpu_frequency].each do |property| %>
+                            <tr>
+                              <td>
+                                <%= property.to_s.humanize %>
+                              </td>
+                              <td>
+                                <%= @vcenter.send(property)[:total] || "N/A" %>
+                              </td>
+                              <td>
+                                <%= @vcenter.send(property)[:used] || "N/A" %>
+                              </td>
+                              <td>
+                                <% unless @vcenter.send(property)[:used].nil? %>
+                                  <%=(@vcenter.send(property)[:used].to_f / @vcenter.send(property)[:total].to_f * 100).to_i %>
+                                <% else %>
+                                  N/A
+                                <%end%>
+                              </td>
+                            </tr>
+                            <%end%>
+                          </tbody>
+                          </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                 <div class="col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-folder-open"> Host folder </h3>
+                        </div>
+                        <div class="panel-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+              <% [:ram, :storage, :cpu_cores, :cpu_frequency].each do |property| %>
+                  <div class="col-lg-3">
+                      <div class="panel panel-primary">
+                          <div class="panel-heading">
+                              <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> <%= property.to_s.humanize %></h3>
+                          </div>
+                          <div class="panel-body">
+                              <%= pie_chart @vcenter.send(property), library: {backgroundColor: "#333"} %>
+                          </div>
+                      </div>
+                  </div>
+              <% end %>
+            </div>
+
+<%= link_to vcenters_path, class: 'btn btn-info' do %>
+  <span class= "glyphicon glyphicon-arrow-left"> Vcenters</span>
+<% end %>
+
+

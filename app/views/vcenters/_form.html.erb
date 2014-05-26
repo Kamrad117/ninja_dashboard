@@ -1,0 +1,7 @@
+<%= simple_form_for @vcenter do |f| %>
+  <%= f.error_notification %>
+    <%= f.input :url, placeholder: @vcenter.url %>
+    <br>
+    <%= f.button :submit, class: 'btn btn-success pull-right' %>
+<% end %>
+
