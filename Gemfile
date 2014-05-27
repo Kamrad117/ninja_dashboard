@@ -15,7 +15,8 @@ gem 'devise'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 gem 'thin'
-gem "chartkick"
+gem 'chartkick'
+gem 'rbvmomi', '1.6.0'
 
 group :development do
   gem 'better_errors'

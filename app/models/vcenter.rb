@@ -1,9 +1,12 @@
+require 'rbvmomi'
+
 class Vcenter < ActiveRecord::Base
   validate :url, presence: true
 
   attr_accessor :ram, :storage, :cpu_cores, :cpu_frequency
 
   def get_data 
+    connect
     set_ram
     set_storage
     set_cpu_cores
@@ -13,20 +16,27 @@ class Vcenter < ActiveRecord::Base
   private 
 
     def set_ram
-      @ram = {total: 10000, used: 7000}
+      @ram = @vcentre.summary.memory_stats
     end
 
     def set_storage
-      @storage = {total: 10000, used: 7000}
+      @storage = @vcentre.summary.storage_stats
     end
 
     def set_cpu_cores
-      @cpu_cores = {total: 10000, used: nil}
+      @cpu_cores = @vcentre.summary.cpu_core_stats
     end
 
     def set_cpu_frequency
-      @cpu_frequency = {total: 10000, used: 7000}
+      @cpu_frequency = @vcentre.summary.cpu_frequency_stats
     end
 
+    def connect 
+      @vim ||= RbVmomi::VIM.connect(connection_opts)
+      @vcentre ||= VSphere::VCenter.new(@vim)
+    end
 
+    def connection_opts
+      { host: @url, insecure: true, user: 'svc-vmcreator', password: 'O5ZkSFQ8b8gP' }
+    end
 end
