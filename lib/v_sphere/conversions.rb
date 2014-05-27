@@ -1,6 +1,6 @@
-require_relative './vhost.rb'
+require_relative './v_host.rb'
 require_relative './summary.rb'
-require_relative './vdatastore.rb'
+require_relative './v_datastore.rb'
 
 module VSphere
   module Conversions
