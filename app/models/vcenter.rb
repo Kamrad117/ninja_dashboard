@@ -1,4 +1,5 @@
 require 'rbvmomi'
+require 'lib/vsphere/lib/vsphere.rb'
 
 class Vcenter < ActiveRecord::Base
   validate :url, presence: true
@@ -37,6 +38,6 @@ class Vcenter < ActiveRecord::Base
     end
 
     def connection_opts
-      { host: @url, insecure: true, user: 'svc-vmcreator', password: 'O5ZkSFQ8b8gP' }
+     p  { host: @url, insecure: true, user: 'svc-vmcreator', password: 'O5ZkSFQ8b8gP' }
     end
 end
