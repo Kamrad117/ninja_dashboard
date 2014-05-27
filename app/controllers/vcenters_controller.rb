@@ -28,7 +28,7 @@ class VcentersController < ApplicationController
     @vcenter = Vcenter.new(vcenter_params)
 
     respond_to do |format|
-      if @vcenter.save
+      if @vcenter.save!
         format.html { redirect_to @vcenter, notice: 'Vcenter was successfully created.' }
         format.json { render :show, status: :created, location: @vcenter }
       else

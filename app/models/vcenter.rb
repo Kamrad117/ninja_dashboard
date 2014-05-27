@@ -1,5 +1,7 @@
 class Vcenter < ActiveRecord::Base
-  attr_accessor :url, :ram, :storage, :cpu_cores, :cpu_frequency
+  validate :url, presence: true
+
+  attr_accessor :ram, :storage, :cpu_cores, :cpu_frequency
 
   def get_data 
     set_ram
@@ -8,10 +10,6 @@ class Vcenter < ActiveRecord::Base
     set_cpu_frequency
   end
 
-    def link
-      attributes["url"]
-    end
-  
   private 
 
     def set_ram
@@ -23,7 +21,7 @@ class Vcenter < ActiveRecord::Base
     end
 
     def set_cpu_cores
-      @cpu_cores = {total: 10000, used: 7000}
+      @cpu_cores = {total: 10000, used: nil}
     end
 
     def set_cpu_frequency

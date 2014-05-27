@@ -8,7 +8,7 @@
             <table class='table table-stripped table-hover'>
                 <% @vcenters.each do |vcenter| %>
                   <tr>
-                    <td><%= link_to vcenter.link, vcenter %></td>
+                    <td><%= link_to vcenter.url, vcenter %></td>
                     <td>
                       <%= link_to edit_vcenter_path(vcenter) do %>
                           <span class="glyphicon glyphicon-cog">
