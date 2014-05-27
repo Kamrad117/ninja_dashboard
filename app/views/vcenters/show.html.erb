@@ -38,7 +38,7 @@
                     <%= property.to_s.humanize %>
                   </td>
                   <td>
-                    <%= @vcenter.send(property)[:used] + @vcenter.send(property)[:free] || "N/A" %>
+                    <%= @vcenter.send(property)[:used]||0 + @vcenter.send(property)[:free] || "N/A" %>
                   </td>
                   <td>
                     <%= @vcenter.send(property)[:used] || "N/A" %>
