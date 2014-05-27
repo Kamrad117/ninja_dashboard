@@ -26,7 +26,7 @@ class Vcenter < ActiveRecord::Base
     end
 
     def set_cpu_cores
-      cpu_cores = @vcentre.summary.cpu_core_stats
+      cpu_cores = @vcentre.summary.cpu_cores_stats
       @cpu_cores = { used: cpu_cores[:used], free: cpu_cores[:total] - cpu_cores[:used] }
     end
 
