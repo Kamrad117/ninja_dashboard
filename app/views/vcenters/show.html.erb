@@ -25,6 +25,9 @@
                   Used
                 </td>
                 <td>
+                  Free
+                </td>
+                <td>
                   Percent
                 </td>
               </thead>
@@ -35,14 +38,17 @@
                     <%= property.to_s.humanize %>
                   </td>
                   <td>
-                    <%= @vcenter.send(property)[:total] || "N/A" %>
+                    <%= @vcenter.send(property)[:used] + @vcenter.send(property)[:free] || "N/A" %>
                   </td>
                   <td>
                     <%= @vcenter.send(property)[:used] || "N/A" %>
                   </td>
                   <td>
+                    <%= @vcenter.send(property)[:free] || "N/A" %>
+                  </td>
+                  <td>
                     <% unless @vcenter.send(property)[:used].nil? %>
-                      <%=(@vcenter.send(property)[:used].to_f / @vcenter.send(property)[:total].to_f * 100).to_i %>
+                      <%=(@vcenter.send(property)[:used].to_f / (@vcenter.send(property)[:used] + @vcenter.send(property)[:free]).to_f * 100).to_i %>
                     <% else %>
                       N/A
                     <%end%>

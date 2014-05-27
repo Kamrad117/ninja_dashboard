@@ -27,7 +27,7 @@ class Vcenter < ActiveRecord::Base
 
     def set_cpu_cores
       cpu_cores = @vcentre.summary.cpu_cores_stats
-      @cpu_cores = { used: cpu_cores[:used], free: cpu_cores[:total] - cpu_cores[:used] }
+      @cpu_cores = { used: cpu_cores[:used], free: 0 }
     end
 
     def set_cpu_frequency
