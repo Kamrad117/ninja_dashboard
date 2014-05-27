@@ -16,19 +16,23 @@ class Vcenter < ActiveRecord::Base
   private 
 
     def set_ram
-      @ram = @vcentre.summary.memory_stats
+      ram = @vcentre.summary.memory_stats
+      @ram = { used: ram[:used], free: ram[:total] - ram[:used] }
     end
 
     def set_storage
-      @storage = @vcentre.summary.storage_stats
+      storage = @vcentre.summary.storage_stats
+      @storage = { used: storage[:used], free: storage[:total] - storage[:used] }
     end
 
     def set_cpu_cores
-      @cpu_cores = @vcentre.summary.cpu_core_stats
+      cpu_cores = @vcentre.summary.cpu_core_stats
+      @cpu_cores = { used: cpu_cores[:used], free: cpu_cores[:total] - cpu_cores[:used] }
     end
 
     def set_cpu_frequency
-      @cpu_frequency = @vcentre.summary.cpu_frequency_stats
+      cpu_frequency = @vcentre.summary.cpu_frequency_stats
+      @cpu_frequency = { used: cpu_frequency[:used], free: cpu_frequency[:total] - cpu_frequency[:used] }
     end
 
     def connect 
