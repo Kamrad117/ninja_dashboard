@@ -8,20 +8,20 @@ module VSphere
       self.summary = subject.summary.props
     end
 
-    def capacity;      summary.capacity            end
-    def free_space;    summary.freeSpace           end
-    def used_space;    capacity - free_space       end
+    def capacity;      (summary.capacity / 1073741824).round(2)            end
+    def free_space;    (summary.freeSpace / 1073741824).round(2)           end
+    def used_space;    (capacity - free_space / 1073741824).round(2)       end
 
     #properties' functions
-    def total_cpu_frequency;      (summary.totalCpu.to_f       / 1000).round(2)        end
-    def used_cpu_frequency;       (summary.effectiveCpu.to_f   / 1000).round(2)        end
-    def free_cpu_frequency;       (total_cpu_frequency - used_cpu_frequency).round(2)    end
+    def total_cpu_frequency;      summary.totalCpu       end
+    def used_cpu_frequency;       summary.effectiveCpu        end
+    def free_cpu_frequency;       total_cpu_frequency - used_cpu_frequency    end
 
     def cpu_cores_number ;        summary.numCpuCores         end
     def cpu_threads_number;       summary.numCpuThreads       end
 
-    def total_memory;             (summary.totalMemory.to_f      / (1024)).round(2)   end
-    def used_memory;              (summary.effectiveMemory.to_f  / (1024)).round(2)   end
+    def total_memory;             (summary.totalMemory.to_f      / 1073741824).round(2)   end
+    def used_memory;              (summary.effectiveMemory.to_f  / 1024).round(2)   end
     def free_memory;              (total_memory - used_memory).round(2)              end
 
 
