@@ -38,7 +38,7 @@
                     <%= property.to_s.humanize %>
                   </td>
                   <td>
-                    <%= @vcenter.send(property)[:used]||0 + @vcenter.send(property)[:free] || "N/A" %>
+                    <%= ((@vcenter.send(property)[:used]||0) + @vcenter.send(property)[:free]) || "N/A" %>
                   </td>
                   <td>
                     <%= @vcenter.send(property)[:used] || "N/A" %>
@@ -68,7 +68,15 @@
                 <h3 class="panel-title"><span class="glyphicon glyphicon-folder-open"> Host folder </h3>
             </div>
             <div class="panel-body">
-
+              <table class="table table-stripped table-hover">
+                <tbody>
+                  <% @vcenter.pools.each do |pool| %>
+                    <tr>
+                      <%= link_to pool.name, {controller: 'vcenters', action: 'pool', pool_name: pool.name} %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
             </div>
         </div>
     </div>
