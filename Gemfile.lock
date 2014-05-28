@@ -96,7 +96,6 @@ GEM
     hike (1.2.3)
     hub (1.12.0)
     i18n (0.6.9)
-    interception (0.5)
     jbuilder (2.0.7)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -128,11 +127,6 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
-    pry-rails (0.3.2)
-      pry (>= 0.9.10)
-    pry-rescue (1.4.1)
-      interception (>= 0.5)
-      pry
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -270,8 +264,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
-  pry-rails
-  pry-rescue
   quiet_assets
   rails (= 4.1.1)
   rails_layout

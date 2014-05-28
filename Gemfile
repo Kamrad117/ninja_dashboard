@@ -33,8 +33,8 @@ group :development do
 end
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'pry-rails'
-  gem 'pry-rescue'
+  # gem 'pry-rails'
+  # gem 'pry-rescue'
   gem 'rspec-rails', '>= 3.0.0.beta2'
 end
 group :test do
