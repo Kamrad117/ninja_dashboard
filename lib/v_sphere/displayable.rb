@@ -3,19 +3,19 @@ module VSphere
 
     #stats format functions
     def memory_stats
-      { total: total_memory, used: used_memory, free: free_memory}
+      { total: total_memory.round(1), used: used_memory.round(1), free: free_memory.round(1) }
     end
 
     def cpu_cores_stats
-      { total: cpu_cores_number, used: nil, free: nil}
+      { total: cpu_cores_number.round(1), used: nil, free: nil}
     end
 
     def cpu_frequency_stats
-      { total: total_cpu_frequency, used: used_cpu_frequency, free: free_cpu_frequency }
+      { total: total_cpu_frequency.round(1), used: used_cpu_frequency.round(1), free: free_cpu_frequency.round(1) }
     end
 
     def storage_stats
-      { total: capacity, used: used_space, free: free_space }
+      { total: capacity.round(1), used: used_space.round(1), free: free_space.round(1) }
     end
 
   end
