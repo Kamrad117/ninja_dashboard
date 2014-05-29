@@ -8,9 +8,9 @@ module VSphere
       self.summary = subject.summary.props
     end
 
-    def capacity;      (summary.capacity / 1073741824).round(2)            end
-    def free_space;    (summary.freeSpace / 1073741824).round(2)           end
-    def used_space;    (capacity - free_space / 1073741824).round(2)       end
+    def capacity;      (summary.capacity.to_f / 1073741824)           end
+    def free_space;    (summary.freeSpace.to_f / 1073741824)          end
+    def used_space;    capacity - free_space                          end
 
     #properties' functions
     def total_cpu_frequency;      summary.totalCpu       end
@@ -20,9 +20,9 @@ module VSphere
     def cpu_cores_number ;        summary.numCpuCores         end
     def cpu_threads_number;       summary.numCpuThreads       end
 
-    def total_memory;             (summary.totalMemory.to_f      / 1073741824).round(2)   end
-    def used_memory;              (summary.effectiveMemory.to_f  / 1024).round(2)   end
-    def free_memory;              (total_memory - used_memory).round(2)              end
+    def total_memory;             (summary.totalMemory.to_f      / 1073741824)   end
+    def used_memory;              (summary.effectiveMemory.to_f  / 1024)         end
+    def free_memory;              (total_memory - used_memory)                   end
 
 
     def total_hosts_number;       summary.numHosts            end
