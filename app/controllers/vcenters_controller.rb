@@ -1,5 +1,5 @@
 class VcentersController < ApplicationController
-  before_action :set_vcenter, only: [:show, :edit, :update, :destroy]
+  before_action :set_vcenter, only: [:show, :edit, :update, :destroy, :pool]
 
   # GET /vcenters
   # GET /vcenters.json
@@ -62,6 +62,11 @@ class VcentersController < ApplicationController
     end
   end
 
+  def pool 
+    @vcenter.get_pools_data
+    @pool = @vcenter.pools.detect { |p| p.name == params[:pool_name] }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_vcenter
@@ -70,6 +75,6 @@ class VcentersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vcenter_params
-      params.require(:vcenter).permit(:url)
+      params.require(:vcenter).permit(:url, :pool_name)
     end
 end

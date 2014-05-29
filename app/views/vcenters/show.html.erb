@@ -28,7 +28,7 @@
                   Free
                 </td>
                 <td>
-                  Percent
+                  Percent used
                 </td>
               </thead>
               <tbody>
@@ -38,20 +38,16 @@
                     <%= property.to_s.humanize %>
                   </td>
                   <td>
-                    <%= @vcenter.send(property)[:used]||0 + @vcenter.send(property)[:free] || "N/A" %>
+                    <%= @vcenter.send(property)[:total].to_i || "N/A" %>
                   </td>
                   <td>
-                    <%= @vcenter.send(property)[:used] || "N/A" %>
+                    <%= @vcenter.send(property)[:used].to_i || "N/A" %>
                   </td>
                   <td>
-                    <%= @vcenter.send(property)[:free] || "N/A" %>
+                    <%= @vcenter.send(property)[:free].to_i || "N/A" %>
                   </td>
                   <td>
-                    <% unless @vcenter.send(property)[:used].nil? %>
-                      <%=(@vcenter.send(property)[:used].to_f / (@vcenter.send(property)[:used] + @vcenter.send(property)[:free]).to_f * 100).to_i %>
-                    <% else %>
-                      N/A
-                    <%end%>
+                    <%= percent_used(@vcenter, property)%>
                   </td>
                 </tr>
                 <%end%>
@@ -65,24 +61,34 @@
      <div class="col-lg-4">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-folder-open"> Host folder </h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-folder-open"> Clusters </h3>
             </div>
             <div class="panel-body">
-
+              <table class="table table-stripped table-hover">
+                <tbody>
+                  <% @vcenter.pools.each do |pool| %>
+                    <tr>
+                      <td>
+                        <%= link_to pool.name, {controller: 'vcenters', action: 'pool', pool_name: pool.name} %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
             </div>
         </div>
     </div>
 </div>
 
 <div class="row">
-  <% properties_need_chart.each do |property| %>
-      <div class="col-lg-<%= col_size %>">
+  <% properties_need_chart(@vcenter).each do |property| %>
+      <div class="col-lg-<%= col_size(@vcenter) %>">
           <div class="panel panel-primary">
               <div class="panel-heading">
                   <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> <%= property.to_s.humanize %></h3>
               </div>
               <div class="panel-body">
-                  <%= pie_chart @vcenter.send(property), library: {backgroundColor: "#333"} %>
+                  <%= pie_chart data_for_chart(@vcenter.send(property)), library: {backgroundColor: "#333"} %>
               </div>
           </div>
       </div>
