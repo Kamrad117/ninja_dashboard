@@ -15,7 +15,7 @@ module VcentersHelper
 
   def percent_used(obj, property)
     unless((obj.send(property)[:total].nil?) or (obj.send(property)[:total] == 0) or (obj.send(property)[:used].nil?) or (obj.send(property)[:used] == 0)) 
-      (obj.send(property)[:used] / obj.send(property)[:total] * 100).round
+      (obj.send(property)[:used].to_f / obj.send(property)[:total].to_f * 100).round(1)
     else 
       'N/A'
     end

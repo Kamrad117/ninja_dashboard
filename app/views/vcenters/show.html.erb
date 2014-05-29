@@ -38,13 +38,13 @@
                     <%= property.to_s.humanize %>
                   </td>
                   <td>
-                    <%= @vcenter.send(property)[:total].to_i || "N/A" %>
+                    <%= @vcenter.send(property)[:total] || "N/A" %>
                   </td>
                   <td>
-                    <%= @vcenter.send(property)[:used].to_i || "N/A" %>
+                    <%= @vcenter.send(property)[:used] || "N/A" %>
                   </td>
                   <td>
-                    <%= @vcenter.send(property)[:free].to_i || "N/A" %>
+                    <%= @vcenter.send(property)[:free] || "N/A" %>
                   </td>
                   <td>
                     <%= percent_used(@vcenter, property)%>

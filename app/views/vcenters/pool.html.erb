@@ -1,4 +1,5 @@
 
+
 <title><%= @pool.name %></title>
 
 <div class="row">
@@ -6,7 +7,12 @@
         <%= render 'layouts/messages' %>
     </div>
 </div>
-  <h2><%= @pool.name %></h2>
+
+<ol class="breadcrumb">
+  <li><%= link_to @vcenter.url, @vcenter %></li>
+  <li class="active"><%= @pool.name %></li>
+</ol>
+
 <div class="row">
     <div class="col-lg-8">
         <div class="panel panel-primary">
@@ -57,7 +63,7 @@
             </div>
         </div>
     </div>
-
+</div>
 
 <div class="row">
   <% properties_need_chart(@pool).each do |property| %>
