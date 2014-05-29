@@ -10,7 +10,7 @@ module VcentersHelper
 
   def data_for_chart(hash)
     hash.delete(:total)
-    hash
+    { "Used #{hash[:used]}" => hash[:used], "Total #{hash[:free]}" => hash[:free] }
   end
 
   def percent_used(obj, property)
@@ -19,5 +19,9 @@ module VcentersHelper
     else 
       'N/A'
     end
+  end
+
+  def unit_for(property)
+    {ram: 'Gbs', storage: 'Gbs', cpu_frequency: 'Mhz', cpu_cores: 'units'}[property]
   end
 end

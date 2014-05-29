@@ -1,12 +1,4 @@
-
-
 <title><%= @pool.name %></title>
-
-<div class="row">
-    <div class="col-lg-12">
-        <%= render 'layouts/messages' %>
-    </div>
-</div>
 
 <ol class="breadcrumb">
   <li><%= link_to @vcenter.url, @vcenter %></li>
@@ -42,7 +34,7 @@
                   <% [:ram, :storage, :cpu_cores, :cpu_frequency].each do |property| %>
                     <tr>
                       <td>
-                        <%= property.to_s.humanize %>
+                        <%= property.to_s.humanize %> <%= unit_for(property) %>
                       </td>
                       <td>
                         <%= @pool.send(property)[:total] || "N/A" %>
@@ -73,7 +65,7 @@
                   <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> <%= property.to_s.humanize %></h3>
               </div>
               <div class="panel-body">
-                  <%= pie_chart data_for_chart(@pool.send(property)), library: {backgroundColor: "#333"} %>
+                  <%= pie_chart data_for_chart(@pool.send(property)), library: { backgroundColor: "#333" , legend: { textStyle: { color: 'white' } } } %>
               </div>
           </div>
       </div>

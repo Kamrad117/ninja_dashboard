@@ -10,7 +10,11 @@ class VcentersController < ApplicationController
   # GET /vcenters/1
   # GET /vcenters/1.json
   def show
-    @vcenter.get_data
+    begin 
+      @vcenter.get_data
+    rescue StandardError => e
+      redirect_to vcenters_url, alert: "Got an error: #{e.class}: #{e.message}" 
+    end
   end
 
   # GET /vcenters/new
@@ -63,8 +67,12 @@ class VcentersController < ApplicationController
   end
 
   def pool 
-    @vcenter.get_pools_data
-    @pool = @vcenter.pools.detect { |p| p.name == params[:pool_name] }
+    begin 
+      @vcenter.get_pools_data
+      @pool = @vcenter.pools.detect { |p| p.name == params[:pool_name] }
+    rescue StandardError => e
+      redirect_to vcenters_url, alert: "Got an error: #{e.class}: #{e.message}" 
+    end
   end
 
   private
